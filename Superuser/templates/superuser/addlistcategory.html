@@ -1,0 +1,57 @@
+{% extends 'superuser/base.html' %}  
+{% block body %}
+{% load static %}
+<!-- Content -->
+<div class="utf_dashboard_content">       
+    <div id="titlebar" class="dashboard_gradient">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Add Listing</h2>
+          <nav id="breadcrumbs">
+            <ul>
+              <li><a href="index_1.html">Home</a></li>
+              <li><a href="dashboard.html">Dashboard</a></li>
+              <li>Add Listing</li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div id="utf_add_listing_part">             
+          <div class="add_utf_listing_section"> 
+            <!-- <div class="utf_add_listing_part_headline_part">
+              <h3><i class="sl sl-icon-user"></i> Have an Account?</h3>
+            </div>			   -->
+            <!-- <div class="row with-forms">				
+              <div class="col-md-12">
+                  <div class="form-group lis-relative">
+                      Sign in If you don’t have an account you can create one below by entering your email address/username. Your account details will be confirmed via email. <a href="#dialog_signin_part" class="login_form sign-in popup-with-zoom-anim">Sign in</a>
+                  </div>
+              </div>
+            </div> -->
+          </div>
+          
+          <div class="add_utf_listing_section margin-top-45"> 
+            <div class="utf_add_listing_part_headline_part">
+              <!-- {% if list %}
+              <h3><i class="sl sl-icon-tag"></i> List</h3>
+              {% endif %} -->
+            </div>   
+            <form action="" method="POST">
+              {% csrf_token %}           
+            <div class="row with-forms">
+              <div class="col-md-6">
+                <h5>catgeory</h5>
+                <input type="text" class="search-field" name="name" id="name" placeholder="Listing Title" value="">
+              </div>
+             
+            <div class="col-md-6">
+              <h5>Images</h5>                  
+              <input type="file" name="icon" id="icon" placeholder="." value="">
+              
+          </div>
+            <input type="submit" value="submit">
+            </form>
+{% endblock %}

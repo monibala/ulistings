@@ -1,0 +1,117 @@
+{% extends 'superuser/base.html' %}  
+{% block body %}
+{% load static %}  
+  
+    <div class="utf_dashboard_content"> 
+      <div id="titlebar" class="dashboard_gradient">
+        <div class="row">
+          <div class="col-md-12">
+            <h2>My Profile</h2>
+            <nav id="breadcrumbs">
+              <ul>
+                <li><a href="index_1.html">Home</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li>My Profile</li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <div class="row"> 
+        <div class="col-lg-12 col-md-12">
+          <div class="utf_dashboard_list_box margin-top-0">
+            <h4 class="gray"><i class="sl sl-icon-user"></i> Profile Details</h4>
+			<form method="post" action="">
+				{% csrf_token %}
+				{% for p in profile %}
+			<div class="utf_dashboard_list_box-static"> 
+              <div class="edit-profile-photo"> <img src="/media/{{p.img}}" alt="">
+                <div class="change-photo-btn">
+                  <div class="photoUpload"> <span><i class="fa fa-upload"></i> Upload Photo</span>
+                    <input type="file" class="upload" name="img" id="img"/>
+                  </div>
+                </div>
+              </div>
+              <div class="my-profile">
+				
+					
+			    <div class="row with-forms">
+					<div class="col-md-4">
+						<label>Name</label>						
+						<input type="text" class="input-text" placeholder="Alex Daniel" value="{{p.name}}" name="name">
+					</div>
+					<div class="col-md-4">
+						<label>Phone</label>						
+						<input type="text" class="input-text" placeholder="(123) 123-456" name="mobile" value="{{p.mobile}}" name="mobile">
+					</div>
+					<!-- <div class="col-md-4">
+						<label>Company</label>						
+						<input type="text" class="input-text" placeholder="ABC Company" value="" name="company">
+					</div> -->
+					<div class="col-md-4">
+						<label>Email</label>						
+						<input type="text" class="input-text" placeholder="test@example.com" name="email" value="{{p.email}}" name="email">
+					</div>
+					<div class="col-md-4">
+						<label>Designation</label>						
+						<input type="text" class="input-text" placeholder="Account Manager" name="designation" value="{{p.designation}}" >
+					</div>
+					<!-- <div class="col-md-4">
+						<label>State</label>						
+						<input type="text" class="input-text" placeholder="London" value="" name="state">
+					</div> -->
+					<div class="col-md-4">
+						<label>Birth</label>						
+						<input type="Date" class="input-text" placeholder="2022-05-12" name="dob" value="{{p.dob}}">
+					{{p.dob}}
+					</div>
+					<!-- <div class="col-md-4">
+						<label>Country</label>						
+						<input type="text" class="input-text" placeholder="England" value="">
+					</div>
+					<div class="col-md-4">
+						<label>Age</label>						
+						<input type="text" class="input-text" placeholder="18 Year" value="">
+					</div> -->
+					<div class="col-md-12">
+						<label>Address</label>
+						<textarea name="address" cols="30" rows="10">{{p.address}}</textarea>
+					</div>
+					<div class="col-md-12">
+						<label>Notes</label>
+						<textarea name="about" cols="30" rows="10">{{p.about}}</textarea>
+					</div>
+					<!-- <div class="col-md-4">
+						<label>Facebook</label>						
+						<input type="text" class="input-text" placeholder="https://www.facebook.com" value="">
+					</div>
+					<div class="col-md-4">
+						<label>Twitter</label>						
+						<input type="text" class="input-text" placeholder="https://www.twitter.com" value="">
+					</div>										
+					<div class="col-md-4">
+						<label>Linkedin</label>
+						<input type="text" class="input-text" placeholder="https://www.linkedin.com" value="">						
+					</div>
+					<div class="col-md-4">
+						<label>Google+</label>
+						<input type="text" class="input-text" placeholder="https://plus.google.com" value="">						
+					</div>
+					<div class="col-md-4">
+						<label>Instagram</label>
+						<input type="text" class="input-text" placeholder="http://instagram.com" value="">						
+					</div>
+					<div class="col-md-4">
+						<label>Skype</label>
+						<input type="text" class="input-text" placeholder="https://www.skype.com" value="">						
+					</div> -->
+				  </div>	
+              </div>
+              <button class="button preview btn_center_item margin-top-15" type="submit">Save Changes</button>
+            </div>
+			{% endfor %}
+		</form>
+          </div>
+        </div>
+
+       {% endblock %}

@@ -1,0 +1,111 @@
+{% extends 'base.html' %}  
+{% block body %}
+{% load static %}
+<div class="clearfix"></div>
+  
+<div id="titlebar" class="gradient margin-bottom-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Categorie Two</h2>          
+        <nav id="breadcrumbs">
+          <ul>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li>Categorie Two</li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+<div class="row">
+    <div class="col-md-12">
+      <h3 class="headline_part centered margin-top-75"> Browse Categorie List<span>Browse the most desirable categories</span></h3>
+    </div>
+  </div>
+  <div class="row margin-bottom-60">
+    {% for c in cat %}
+    <div class="col-md-4 col-sm-6 col-xs-12"> 
+       <a href="{% url 'listdetail' c.slug %}" class="img-box" data-background-image="/media/{{c.icon}}">
+    <div class="utf_img_content_box visible">
+      <h4>{{c.name}} </h4>
+      <span>18 Listings</span> 
+    </div>
+       </a> 
+  </div>
+  {% endfor %}
+    <!-- <div class="col-md-4 col-sm-6 col-xs-12"> 
+       <a href="listings_list_with_sidebar.html" class="img-box" data-background-image="images/popular-location-02.jpg">
+    <div class="utf_img_content_box visible">
+      <h4>Shops</h4>
+      <span>24 Listings</span> 
+    </div>
+       </a> 
+  </div>
+    <div class="col-md-4 col-sm-6 col-xs-12"> 
+       <a href="listings_list_with_sidebar.html" class="img-box" data-background-image="images/popular-location-03.jpg">
+    <div class="utf_img_content_box visible">
+      <h4>Restaurant</h4>
+      <span>17 Listings</span> 
+    </div>
+       </a> 
+  </div>
+    <div class="col-md-4 col-sm-6 col-xs-12"> 
+       <a href="listings_list_with_sidebar.html" class="img-box" data-background-image="images/popular-location-04.jpg">
+    <div class="utf_img_content_box visible">
+      <h4>Outdoor Activities</h4>
+      <span>12 Listings</span> 
+    </div>
+       </a> 
+  </div>
+    <div class="col-md-4 col-sm-6 col-xs-12"> 
+       <a href="listings_list_with_sidebar.html" class="img-box" data-background-image="images/popular-location-05.jpg">
+    <div class="utf_img_content_box visible">
+      <h4>Hotels</h4>
+      <span>14 Listings</span> 
+    </div>
+       </a> 
+  </div>
+    <div class="col-md-4 col-sm-6 col-xs-12"> 
+       <a href="listings_list_with_sidebar.html" class="img-box" data-background-image="images/popular-location-06.jpg">
+    <div class="utf_img_content_box visible">
+      <h4>New York</h4>
+      <span>9 Listings</span> 
+    </div>
+       </a>
+  </div> -->
+  </div>
+</div>
+
+<section class="utf_cta_area_item utf_cta_area2_block">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="utf_subscribe_block clearfix">
+                  <div class="col-md-8 col-sm-7">
+                      <div class="section-heading">
+                          <h2 class="utf_sec_title_item utf_sec_title_item2">Subscribe to Newsletter!</h2>
+                          <p class="utf_sec_meta">
+                              Subscribe to get latest updates and information.
+                          </p>
+                      </div>
+                  </div>
+                  <div class="col-md-4 col-sm-5">
+                      <div class="contact-form-action">
+                          <form method="post">
+                              <span class="la la-envelope-o"></span>
+                              <input class="form-control" type="email" placeholder="Enter your email" required="">
+                              <button class="utf_theme_btn" type="submit">Subscribe</button>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+</section>
+
+  
+{% endblock %}

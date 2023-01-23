@@ -1,0 +1,390 @@
+{% extends 'superuser/base.html' %}  
+{% block body %}
+{% load static %}
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<div class="utf_dashboard_content"> 
+      <div id="titlebar" class="dashboard_gradient">
+        <div class="row">
+          <div class="col-md-12">
+            <h2>{{appname|title}}</h2>
+            <nav id="breadcrumbs">
+              <ul>
+                <li><a href="index_1.html">Home</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li>{{appname|title}}</li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <div class="row"> 
+        <div class="col-lg-12 col-md-12">
+          <div class="utf_dashboard_list_box margin-top-0">
+			<div class="sort-by my_sort_by">
+                <div class="utf_sort_by_select_item">
+                  <!-- <select data-placeholder="Default Listing" class="utf_chosen_select_single">
+                    <option>Default Listing</option>
+				    <option>Active Listing</option>
+				    <option>Pending Listing</option>
+                    <option>Expired Listing</option>
+                  </select> -->
+                  {% if lists %}
+                  <button class="btn btn-info btn-lg" value="Add" style="background-color:#4fb1db;"><a href="{% url 'addlist' %}" style="text-decoration: none;">ADD</a></button>
+                  {% elif features %}
+                  <button class="btn btn-info btn-lg" value="Add" style="background-color:#4fb1db;"><a href="{% url 'addfeatures' %}" style="text-decoration: none;">ADD</a></button>
+                  {% elif menu %}
+                  <button class="btn btn-info btn-lg" value="Add" style="background-color:#4fb1db;"><a href="{% url 'addmenu' %}" style="text-decoration: none;">ADD</a></button>
+                  {% elif blg %}
+                  <button class="btn btn-info btn-lg" value="Add" style="background-color:#4fb1db;"><a href="{% url 'addblog' %}" style="text-decoration: none;">ADD</a></button>
+                  {% else %}
+                  <button class="btn btn-info btn-lg" value="Add" style="background-color:#4fb1db;"><a href="{% url 'addlist' %}" style="text-decoration: none;">ADD</a></button>
+                  {% endif %}
+                </div>
+            </div>
+            <h4><i class="sl sl-icon-list"></i> My Listings</h4>
+            <ul>
+              {% for li in lists %}
+              <li>
+                <div class="utf_list_box_listing_item">
+                  {% if li.images %}
+                  <div class="utf_list_box_listing_item-img">
+                    <a href="#"><img src="/media/{{li.images}}" alt="">
+                    </a>
+                  </div>
+                  {% endif %}
+                  <div class="utf_list_box_listing_item_content">
+                    <div class="inner">
+                    <a href = ""  style="text-decoration: none;"><h3>{{li.name}}</h3></a>  
+					  <span><i class="im im-icon-Hotel"></i>{{li.catgeory}}</span> 
+                      <span><i class="fa fa-map-marker"></i> {{li.address}}</span>
+					  <span><i class="fa fa-phone"></i> (+15){{li.mobile}}</span>
+						 <div class="utf_star_rating_section" data-rating="4.5"> 
+							<div class="utf_counter_star_rating">(4.5)</div>							
+						</div>
+            <p>{{li.description}}</p>
+						 <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar.</p> -->
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="buttons-to-right"> 
+					
+           
+           <button type="button" onclick="$('#listid').val('{{li.name}}');" class="btn btn-info btn-lg" data-toggle="modal" data-target="#edit">Edit</button>
+           <button type="button" onclick="$('#name').val('{{li.name}}');" class="btn btn-info btn-lg" data-toggle="modal" data-target="#delete">Delete</button>
+                 </div>
+      </li>
+              {% endfor %}
+      </ul>
+                    <!-- Features -->
+     {% if features %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Features List</th>
+            <th>Hotel name</th>
+           
+          </tr>
+        </thead>
+        <tbody>
+          {% for f in features %}
+          <tr>
+          
+            <td>{{f.features_list}}</td>
+            <td>{{f.hotelname}}</td>
+            <td><button type="button" onclick="$('#featureid').val('{{f.id}}');" class="btn btn-info btn-lg" data-toggle="modal" data-target="#edit">Edit</button></td>
+            <td><button type="button" onclick="$('#fname').val('{{f.features_list}}');" class="btn btn-info btn-lg" data-toggle="modal" data-target="#delete">Delete</button></td>
+          </tr>
+          {% endfor %}
+          </tbody>
+          </table>
+          {% elif category %}
+          <!-- LIST Category -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th>List name</th>
+                <th>Image</th>
+               
+              </tr>
+            </thead>
+            <tbody>
+              {% for li in category %}
+              <tr>
+              
+                <td>{{li.name}}</td>
+               {% if li.icon %}
+                <td><img src="/media/{{li.icon}}" alt="" style="width:15%; height:15%;"></td>
+             {% endif %}
+                <td><button type="button" onclick="$('#listcatid').val('{{li.name}}');" class="btn btn-info btn-lg" data-toggle="modal" data-target="#edit">Edit</button></td>
+                <td><button type="button" onclick="$('#catid').val('{{li.name}}');" class="btn btn-info btn-lg" data-toggle="modal" data-target="#delete">Delete</button></td>
+              </tr>
+              {% endfor %}
+              </tbody>
+              </table>
+              {% elif menu %}
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>MenuCategory</th>
+                    <th>Items</th>
+                    <th>Restaurant</th>
+                    <th>Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for m in menu %}
+                  <tr>
+                  
+                    <td>{{m.menutags}}</td>
+                    <td>{{m.items}}</td>
+                    <td>{{m.restaurant}}</td>
+                    <td>{{m.price}}</td>
+                    <td><button type="button" onclick="$('#menuid').val('{{m.items}}');" class="btn btn-info btn-lg" data-toggle="modal" data-target="#edit">Edit</button></td>
+                    <td><button type="button" onclick="$('#menuitemid').val('{{m.items}}');" class="btn btn-info btn-lg" data-toggle="modal" data-target="#delete">Delete</button></td>
+                  </tr>
+                  {% endfor %}
+                  </tbody>
+                  </table>
+                  <!-- Blogs -->
+                  {% elif blg %}
+                  <ul>
+                    {% for b in blg %}
+                    <li>
+                      <div class="utf_list_box_listing_item">
+                        {% if b.images %}
+                        <div class="utf_list_box_listing_item-img">
+                          <a href="#"><img src="/media/{{b.images}}" alt="">
+                          </a>
+                        </div>
+                        {% endif %}
+                        <div class="utf_list_box_listing_item_content">
+                          <div class="inner">
+                          <a href = ""  style="text-decoration: none;"><h3>{{b.title}}</h3></a>  
+                  <!-- <span><i class="im im-icon-Hotel"></i>{{b.description}}</span>  -->
+                            <span><i class="fa fa-user"></i> {{b.posted_by}}</span>
+                  <span><i class="fa fa-calendar"></i> {{b.date}}</span>
+                   <!-- <div class="utf_star_rating_section" data-rating="4.5"> 
+                    <div class="utf_counter_star_rating">(4.5)</div>							
+                  </div> -->
+                  <p>{{b.description}}</p>
+                   <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar.</p> -->
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div class="buttons-to-right" style="margin-top: -70px;"> 
+                
+                 
+                 <button type="button" onclick="$('#blogid').val('{{b.title}}');" class="btn btn-info btn-lg" data-toggle="modal" data-target="#edit">Edit</button>
+                 <button type="button" onclick="$('#title').val('{{b.title}}');" class="btn btn-info btn-lg" data-toggle="modal" data-target="#delete">Delete</button>
+                       </div>
+            </li>
+                    {% endfor %}
+            </ul>
+         {% endif %}
+      </div>
+		  
+
+      </div>
+      </div>
+      </div>
+         <!-- Modal -->
+         <!-- Edit Bootstrap -->
+         <!-- Modal -->
+<div class="modal fade" id="edit" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Modal</h4>
+      </div>
+      {% if lists %}
+      <form method="post" action="">
+        {% csrf_token %}
+      <div class="modal-body">
+        <p>
+          <!-- <p class="utf_row_form utf_form_wide_block"> -->
+              
+          <input name="listid" id="listid">
+         
+        
+      <!-- </p> -->
+      
+      <!-- <p class="utf_row_form utf_form_wide_block"> -->
+                      <label>Category</label>
+                      <select name="catgeory" id="catgeory" class="form-control">
+                       <option value="0">select</option>
+                         {% for c in cat %}
+                        
+                          <option value="{{c.name}}">{{c.name}}</option>
+                          {% endfor %}
+                      </select>  
+                      <!-- </p> -->
+                      <!-- <p class="utf_row_form utf_form_wide_block"> -->
+                                <label>Title</label>
+                                <input class="form-control" name="name" id="name" type="text">
+                      <!-- </p> -->
+                           
+                      <!-- <p class="utf_row_form utf_form_wide_block"> -->
+                             <label>Description</label>
+                             <textarea class="form-control" name="description" rows="3"></textarea>
+                      <!-- </p> -->
+                               
+                      <!-- <p class="utf_row_form utf_form_wide_block"> -->
+                            <label>Images</label>
+                            <input class="form-control" name="images" type="file">
+                            <label>Price</label>
+                            <input class="form-control" name="price" type="number">
+                      <!-- </p>  -->
+                        <!-- <p class="utf_row_form utf_form_wide_block"> -->
+                     <label>Mobile</label>
+                     <input class="form-control" type="number" name="mobile">
+                      <!-- </p>
+                      <p class="utf_row_form utf_form_wide_block"> -->
+                  <label>Email</label>
+                  <input class="form-control" type="email" name="email">
+                      <!-- </p>
+                      <p class="utf_row_form utf_form_wide_block"> -->
+                <label>website</label>
+                <input class="form-control" type="url" name="website">
+                <label>Address</label>
+                <input class="form-control" type="text" name="address" id="address">
+                      <!-- </p>
+                      <p class="utf_row_form utf_form_wide_block"> -->
+              <label>contact Person</label>
+              <input class="form-control" type="text" name="contact_person">
+          <!-- </p>
+          <p class="utf_row_form utf_form_wide_block"> -->
+            <label>contact Photo</label>
+            <input class="form-control" type="file" name="contact_photo">
+          <!-- </p>
+        </p> -->
+      </div>
+     
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-success">Save changes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </form>
+    {% elif features %}
+    <form method="post" action="">
+      {% csrf_token %}
+      <input name="featureid" id="featureid">
+              <label>Features</label>
+                <input class="form-control" type="text" name="features_list">
+              <label>Hotel name</label>
+              <select name="hotelname" id="hotelname" class="form-control">
+                <option value="0">select</option>
+                {% for l in list %} 
+                <option value="{{l.name}}">{{l.name}}</option>
+                {% endfor %}
+               </select>  
+               <div class="modal-footer">
+                <button type="submit" class="btn btn-success">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+    </form>
+    {% elif category %}
+    <form method="post" action="">
+      {% csrf_token %}
+      <input name="listcatid" id="listcatid">
+              <label>Category</label>
+                <input class="form-control" type="text" name="name">
+              <label>Image</label>
+              <input class="form-control" type="file" name="icon">
+               <div class="modal-footer">
+                <button type="submit" class="btn btn-success">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+    </form>
+    {% elif menu %}
+    <form method="post" action="">
+      {% csrf_token %}
+      <input name="menuid" id="menuid">
+      <label>MenuCategory</label>
+      <select name="menutags" id="menutags" class="form-control">
+        <option value="0">select</option>
+        
+        <option value="Breakfast">Breakfast</option>
+        <option value="">Lunch</option>
+        <option value="">Dinner</option>
+       </select>  
+              <label>Items</label>
+              <input class="form-control" type="text" name="items">
+              <label>Restaurant</label>
+              <select name="restaurant" id="restaurant" class="form-control">
+                {% for l in list %}
+                <option value="{{l.name}}">{{l.name}}</option>
+                {% endfor %}
+              </select>
+              <label>Price</label>
+              <input class="form-control" type="number" name="price">
+               <div class="modal-footer">
+                <button type="submit" class="btn btn-success">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+    </form>
+    {% elif blg %}
+    <form method="post" action="">
+      {% csrf_token %}
+      <input name="blogid" id="blogid">
+      <label>Blog Title</Title></label>
+      <input class="form-control" type="text" name="title">
+              <label>Images</label>
+              <input class="form-control" type="file" name="images">
+              <label>Description</label>
+              <input class="form-control" type="text" name="description">
+              <label>Posted By</label>
+              <input class="form-control" type="text" name="posted_by">
+              <label>Posted On</label>
+              <input class="form-control" type="calendar" name="date">
+               <div class="modal-footer">
+                <button type="submit" class="btn btn-success">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+    </form>
+    {% endif %}
+    </div>
+
+  </div>
+</div>
+
+    <!-- Delete bootstrap -->
+    <div class="modal fade" id="delete" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" id="delete">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Delete</h4>
+        </div>
+        <form action="" method="post">{% csrf_token %}
+        <div class="modal-body">
+          <input type="hidden" name="name" id="name">
+          <input type="hidden" name="fid" id="fid">
+          <input type="hidden" name="catid" id="catid">
+          <input type="hidden" name="menuitemid" id="menuitemid">
+          <input type="" name="title" id="title">
+          <p>Are you sure you wnat to delete.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger">Yes</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+       {% endblock %}
